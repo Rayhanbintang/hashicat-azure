@@ -1,3 +1,7 @@
+provider "azurerm" {
+  features {}
+}
+
 resource "azurerm_resource_group" "example" {
   name     = "my-resources"
   location = "West Europe"
@@ -16,10 +20,10 @@ module "network" {
     "subnet3" : ["Microsoft.Sql"]
   }
   use_for_each = true
-  
   tags = {
     environment = "dev"
-    costcenter  = "itoc"
+    costcenter  = "it"
   }
 
-  }
+  depends_on = [azurerm_resource_group.example]
+}
